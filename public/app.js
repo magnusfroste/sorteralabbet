@@ -44,6 +44,7 @@
   }
   var senasteTal = 0;
   function sag(text) {
+          try { if (window.__rost && window.__rost(text, true)) return; } catch (e) { }
     if (!S.ljud || !('speechSynthesis' in window)) return;
     try {
       var nu = Date.now();
