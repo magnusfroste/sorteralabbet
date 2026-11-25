@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vattenresan – vattnets kretslopp (kemi åk 4–6)</title>
+<meta name="description" content="Följ en droppe vatten ett helt varv genom vattnets kretslopp: avdunstning, kondensering, nederbörd, infiltration och avrinning. Kemi åk 4–6. Gratis, ingen inloggning.">
+<meta name="theme-color" content="#faf8f3">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:title" content="Vattenresan">
+<meta property="og:description" content="Följ en droppe vatten genom vattnets kretslopp. Kemi åk 4–6.">
+<meta property="og:image" content="og.png">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="styles.css">
+<script src="https://www.skolappar.com/kotten.js" defer></script>
+</head>
+<body>
+
+<div id="startskarm">
+  <div class="sk-inner">
+    <img class="sk-ikon" src="icon-192.png" alt="" width="96" height="96">
+    <h1>Vattenresan</h1>
+    <p class="sk-tagline">Följ en droppe vatten ett helt varv genom kretsloppet.</p>
+    <div class="sk-taggar"><span>Kemi</span><span>Åk 4–6</span><span>Kretslopp</span></div>
+    <button class="sk-play" id="spela" aria-label="Spela Vattenresan">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+      Spela
+    </button>
+    <p class="sk-fot">Gratis · ingen inloggning · skolappar.com</p>
+    <details class="sk-laroplan">
+      <summary>Läroplanskoppling (Lgr22)</summary>
+      <p><b>Kemi, åk 4–6, centralt innehåll:</b> ”Vattnets egenskaper och kretslopp.”</p>
+      <p>Varje steg i appen är en länk i kretsloppet: solen värmer vattnet så att det avdunstar, ångan kyls och kondenserar till moln, molnet blir tungt och ger nederbörd, och vattnet tar sig tillbaka till sjön – genom marken (infiltration och grundvatten) eller ovanpå hårda ytor (avrinning och dagvatten). Eleven väljer själv nästa steg och får en förklaring som skrivs och läses upp. Nivå 2 byter miljö till en stad och nivå 3 till vintern, där tjäle och snö ändrar vägen – samma kretslopp, andra förutsättningar. Källor för faktaraderna: SMHI (Vattnets kretslopp), Skolverket (Lgr22), NWT En experimentbok för barn (vattenexperiment).</p>
+    </details>
+  </div>
+</div>
+
+<main id="spel" hidden>
+  <header class="hud">
+    <div class="hud-vanster">
+      <div class="niva" id="niva">Nivå 1 · Sommarsjön</div>
+      <div class="stjarnor" id="stjarnor" aria-label="stjärnor"></div>
+    </div>
+    <button class="ikon-knapp" id="ljud" aria-label="Ljud på eller av">
+      <svg viewBox="0 0 24 24" aria-hidden="true" id="ljudikon"></svg>
+    </button>
+  </header>
+
+  <div class="scen" id="scen">
+    <svg id="bild" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Sjö, skogsbacke och stad. En droppe vatten rör sig genom kretsloppet.">
+      <defs>
+        <linearGradient id="himmel" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e3eef5"/><stop offset="1" stop-color="#f7fbfd"/>
+        </linearGradient>
+        <linearGradient id="havet" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#4d9dc0"/><stop offset="1" stop-color="#256a8d"/>
+        </linearGradient>
+        <linearGradient id="jorden" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#b99a72"/><stop offset="1" stop-color="#8f7150"/>
+        </linearGradient>
+        <radialGradient id="solen" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stop-color="#ffe9a8"/><stop offset="1" stop-color="#f6c65a"/>
+        </radialGradient>
+      </defs>
+
+      <!-- himmel -->
+      <rect x="0" y="0" width="1000" height="620" fill="url(#himmel)"/>
+
+      <!-- sol -->
+      <g id="sol" class="sol">
+        <g class="sol-strålar" stroke="#f2b93f" stroke-width="6" stroke-linecap="round">
+          <line x1="828" y1="30" x2="828" y2="48"/><line x1="828" y1="144" x2="828" y2="162"/>
+          <line x1="762" y1="96" x2="780" y2="96"/><line x1="876" y1="96" x2="894" y2="96"/>
+          <line x1="781" y1="49" x2="794" y2="62"/><line x1="862" y1="130" x2="875" y2="143"/>
+          <line x1="875" y1="49" x2="862" y2="62"/><line x1="794" y1="130" x2="781" y2="143"/>
+        </g>
+        <circle cx="828" cy="96" r="42" fill="url(#solen)"/>
+      </g>
+
+      <!-- moln -->
+      <g id="moln" class="moln">
+        <g fill="#ffffff" stroke="#d7e2e8" stroke-width="3">
+          <circle cx="486" cy="132" r="40"/><circle cx="530" cy="112" r="52"/>
+          <circle cx="574" cy="136" r="38"/><rect x="470" y="126" width="120" height="46" rx="23"/>
+        </g>
+        <g id="regndroppar" class="regndroppar" stroke="#3f88ac" stroke-width="5" stroke-linecap="round" opacity="0">
+          <line x1="500" y1="176" x2="496" y2="200"/><line x1="528" y1="178" x2="524" y2="204"/>
+          <line x1="556" y1="176" x2="552" y2="200"/>
+        </g>
+      </g>
+
+      <!-- hav -->
+      <path d="M0 430 H392 L392 620 H0 Z" fill="url(#havet)"/>
+      <g stroke="#8ec6dc" stroke-width="4" fill="none" opacity="0.75" stroke-linecap="round">
+        <path d="M18 458 q18 -10 36 0 t36 0"/><path d="M120 486 q18 -10 36 0 t36 0"/>
+        <path d="M40 520 q18 -10 36 0 t36 0"/><path d="M210 462 q18 -10 36 0 t36 0"/>
+        <path d="M240 528 q18 -10 36 0 t36 0"/><path d="M140 566 q18 -10 36 0 t36 0"/>
+      </g>
+
+      <!-- land: backe -->
+      <path d="M360 430 Q 440 428 500 372 Q 560 318 620 330 Q 690 344 748 400 L 770 430 Z" fill="#7aa86a"/>
+      <path d="M360 430 Q 440 428 500 372 Q 560 318 620 330 Q 690 344 748 400 L 770 430 Z" fill="none" stroke="#5d8a50" stroke-width="4"/>
+
+      <!-- jordlager under backen -->
+      <path d="M380 430 H770 V620 H380 Z" fill="url(#jorden)"/>
+      <g fill="#a2825c" opacity="0.55">
+        <circle cx="432" cy="470" r="6"/><circle cx="505" cy="500" r="7"/><circle cx="610" cy="472" r="6"/>
+        <circle cx="690" cy="512" r="7"/><circle cx="740" cy="470" r="5"/>
+      </g>
+      <!-- grundvatten -->
+      <g id="grundvatten">
+        <rect x="380" y="536" width="390" height="54" fill="#6ea9c6" opacity="0.55"/>
+        <g fill="#3f88ac" opacity="0.85">
+          <circle cx="410" cy="556" r="4"/><circle cx="440" cy="572" r="4"/><circle cx="470" cy="552" r="4"/>
+          <circle cx="500" cy="570" r="4"/><circle cx="530" cy="556" r="4"/><circle cx="560" cy="574" r="4"/>
+          <circle cx="590" cy="554" r="4"/><circle cx="620" cy="570" r="4"/><circle cx="650" cy="558" r="4"/>
+          <circle cx="680" cy="572" r="4"/><circle cx="710" cy="554" r="4"/><circle cx="740" cy="570" r="4"/>
+        </g>
+      </g>
+
+      <!-- träd -->
+      <g class="trad">
+        <g transform="translate(470 316)"><rect x="-5" y="0" width="10" height="34" fill="#7a5a3a"/><path d="M0 -46 L24 -6 H-24 Z" fill="#3f7b52"/><path d="M0 -72 L19 -34 H-19 Z" fill="#4a8b5c"/></g>
+        <g transform="translate(560 300)"><rect x="-5" y="0" width="10" height="34" fill="#7a5a3a"/><path d="M0 -50 L26 -8 H-26 Z" fill="#3f7b52"/><path d="M0 -78 L20 -38 H-20 Z" fill="#4a8b5c"/></g>
+        <g transform="translate(660 334)"><rect x="-5" y="0" width="10" height="34" fill="#7a5a3a"/><path d="M0 -42 L22 -4 H-22 Z" fill="#3f7b52"/><path d="M0 -66 L17 -30 H-17 Z" fill="#4a8b5c"/></g>
+      </g>
+
+      <!-- stad till höger -->
+      <g class="stad">
+        <rect x="770" y="392" width="230" height="228" fill="#6f757b"/>
+        <g stroke="#f2f2ee" stroke-width="4" opacity="0.8" stroke-dasharray="20 18">
+          <line x1="790" y1="470" x2="980" y2="470"/>
+        </g>
+        <!-- hus -->
+        <g>
+          <rect x="800" y="284" width="128" height="108" fill="#e8e0d2" stroke="#b8ab97" stroke-width="3"/>
+          <path d="M792 284 L864 238 L936 284 Z" fill="#b06a52"/>
+          <rect x="818" y="306" width="26" height="26" fill="#9ec6d8" stroke="#7da8bd" stroke-width="2"/>
+          <rect x="858" y="306" width="26" height="26" fill="#9ec6d8" stroke="#7da8bd" stroke-width="2"/>
+          <rect x="898" y="330" width="22" height="62" fill="#8a7050"/>
+        </g>
+        <!-- dagvattenbrunn -->
+        <g id="brunn-g" class="brunn">
+          <rect x="908" y="404" width="52" height="16" rx="4" fill="#4b5056" stroke="#363a3f" stroke-width="2"/>
+          <g stroke="#8f969c" stroke-width="3">
+            <line x1="916" y1="408" x2="916" y2="418"/><line x1="926" y1="408" x2="926" y2="418"/>
+            <line x1="936" y1="408" x2="936" y2="418"/><line x1="946" y1="408" x2="946" y2="418"/>
+          </g>
+        </g>
+        <text x="934" y="452" text-anchor="middle" class="scen-text">dagvatten</text>
+      </g>
+
+      <!-- etiketter på marken -->
+      <text x="150" y="600" text-anchor="middle" class="scen-text ljus">sjö</text>
+      <text x="560" y="600" text-anchor="middle" class="scen-text ljus">mark</text>
+
+      <!-- vattendroppen -->
+      <g id="droppe" class="droppe">
+        <circle cx="0" cy="0" r="17" fill="#2f86b0" stroke="#1f6285" stroke-width="3"/>
+        <ellipse cx="-5" cy="-6" rx="5" ry="3.4" fill="#cfeaf6" opacity="0.9"/>
+      </g>
+    </svg>
+  </div>
+
+  <section class="panel">
+    <p class="fraga" id="fraga"></p>
+    <p class="forklaring" id="forklaring" hidden></p>
+    <div class="alt" id="alt"></div>
+    <button class="nasta" id="nasta" hidden>Nästa</button>
+  </section>
+</main>
+
+<div id="overlay" hidden>
+  <div class="ov-inner">
+    <img class="ov-bild" id="ov-bild" alt="" width="112" height="112">
+    <div class="ov-stjarnor" id="ov-stjarnor"></div>
+    <h2 id="ov-titel"></h2>
+    <p class="ov-text" id="ov-text"></p>
+    <div class="ov-knappar">
+      <button class="knapp stor" id="ov-nasta">Nästa nivå</button>
+      <button class="knapp tyst" id="ov-om" hidden>Spela igen</button>
+    </div>
+  </div>
+</div>
+
+<script src="kretslopp.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
