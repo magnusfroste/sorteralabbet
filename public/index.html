@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sortera i labbet – löslighet, ledningsförmåga och pH (åk 4–6)</title>
+<meta name="description" content="Sortera ämnen och material i labbet: löser det sig i vatten, leder det ström, är det surt eller basiskt? Kemi åk 4–6. Gratis, ingen inloggning.">
+<meta name="theme-color" content="#faf8f3">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:title" content="Sortera i labbet">
+<meta property="og:description" content="Löser det sig? Leder det ström? Surt eller basiskt? Kemi åk 4–6.">
+<meta property="og:image" content="og.png">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="styles.css">
+<script src="https://www.skolappar.com/kotten.js" defer></script>
+</head>
+<body>
+
+<div id="startskarm">
+  <div class="sk-inner">
+    <img class="sk-ikon" src="icon-192.png" alt="" width="96" height="96">
+    <h1>Sortera i labbet</h1>
+    <p class="sk-tagline">Löser det sig? Leder det ström? Surt eller basiskt?</p>
+    <div class="sk-taggar"><span>Kemi</span><span>Åk 4–6</span><span>Sortera</span></div>
+    <button class="sk-play" id="spela" aria-label="Spela Sortera i labbet">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+      Spela
+    </button>
+    <p class="sk-fot">Gratis · ingen inloggning · skolappar.com</p>
+    <details class="sk-laroplan">
+      <summary>Läroplanskoppling (Lgr22)</summary>
+      <p><b>Kemi, åk 4–6, centralt innehåll:</b> ”Indelning av ämnen och material utifrån egenskaperna löslighet, ledningsförmåga, surt eller basiskt.” och ”Vattnets egenskaper och kretslopp.”</p>
+      <p>Varje fråga visar ett prov: ett glas vatten (löser det sig?), en sluten krets med batteri och lampa (leder det ström?) eller ett pH-papper (surt eller basiskt?). Barnet trycker på den låda som passar. Rätt svar ger en faktarad som skrivs och läses upp, till exempel att saltvatten leder ström men rent vatten nästan inte alls, och att blyertspetsen av grafit leder ström. Nivå 4 blandar proven, så att barnet måste läsa provet i stället för lådorna. Ingenting smakas eller blandas i appen – den visar bara resultaten av skolans vanliga försök. Källa: Skolverket, läroplanen för grundskolan (Lgr22), kemi åk 4–6.</p>
+    </details>
+  </div>
+</div>
+
+<main id="spel" hidden>
+  <header class="hud">
+    <div class="niva" id="niva" aria-label="nivå"></div>
+    <div class="stjarnor" id="stjarnor" aria-label="stjärnor"></div>
+    <button class="ikon-knapp" id="ljud" aria-label="Ljud på eller av">
+      <svg viewBox="0 0 24 24" aria-hidden="true" id="ljudikon"></svg>
+    </button>
+  </header>
+
+  <div class="prov" id="prov">
+    <svg class="prov-ikon" id="provikon" viewBox="0 0 48 48" aria-hidden="true"></svg>
+    <span id="provtext">Löser det sig i vatten?</span>
+  </div>
+
+  <section class="bank" id="bank">
+    <div class="foremal" id="foremal" aria-label="föremål på labbänken"></div>
+    <p class="foremal-namn" id="foremalnamn"></p>
+    <p class="faktaruta" id="faktaruta"></p>
+  </section>
+
+  <div class="lador" id="lador"></div>
+</main>
+
+<div id="overlay" hidden>
+  <div class="ov-inner">
+    <img class="ov-bild" id="ov-bild" alt="" width="112" height="112">
+    <div class="ov-stjarnor" id="ov-stjarnor"></div>
+    <h2 id="ov-titel"></h2>
+    <div class="ov-knappar">
+      <button class="knapp stor" id="ov-nasta">Nästa nivå</button>
+      <button class="knapp tyst" id="ov-om" hidden>Spela igen</button>
+    </div>
+  </div>
+</div>
+
+<script src="amnen.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
